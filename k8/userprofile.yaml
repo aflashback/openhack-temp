@@ -25,9 +25,9 @@ spec:
             - name: SQL_SERVER
               value: openhacksql
             - name: SQL_USER
-              value: sqladmin
+              value: sqladminzKs1348
             - name: SQL_PASSWORD
-              value: P@ssw0rd             
+              value: gB2hf9Vg0
         resources:
             requests:
               cpu: 250m

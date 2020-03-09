@@ -6,7 +6,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: userjava-api
+      app: userprofile-api
   template:
     metadata:
       labels:

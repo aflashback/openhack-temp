@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        app: trip-api
+        app: trips-api
     spec:
       containers:
       - name: trips

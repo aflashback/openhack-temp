@@ -23,7 +23,7 @@ spec:
             - name: SQL_DBNAME
               value: mydrivingDB
             - name: SQL_SERVER
-              value: openhacksql
+              value: sqlserverzks1348.database.windows.net
             - name: SQL_USER
               value: sqladminzKs1348
             - name: SQL_PASSWORD

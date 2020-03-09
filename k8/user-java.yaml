@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: poi-deployment
+  name: userjava-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: poi-api
+      app: userjava-api
   template:
     metadata:
       labels:
-        app: poi-api
+        app: userjava-api
     spec:
       containers:
-      - name: poi
-        image: registryzks1348.azurecr.io/poi:v1
+      - name: user-java
+        image: registryzks1348.azurecr.io/user-java:v1
         ports:
         - containerPort: 80
         env:
@@ -35,18 +35,19 @@ spec:
             limits:
               cpu: 500m
               memory: 500Mi
+            
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: poi-service
+  name: userjava-service
 spec:
   type: LoadBalancer
   ports:
   - port: 80
     targetPort: 80
   selector:
-    app: poi-api
+    app: userjava-api
 ---
 
 

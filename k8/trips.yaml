@@ -1,35 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: userprofile-deployment
+  name: trips-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: userjava-api
+      app: trips-api
   template:
     metadata:
       labels:
-        app: userprofile-api
+        app: trip-api
     spec:
       containers:
-      - name: userprofile
-        image: registryzks1348.azurecr.io/userprofile:v1
+      - name: trips
+        image: registryzks1348.azurecr.io/trips:v1
         ports:
         - containerPort: 80
         env:
-            - name: ASPNETCORE_ENVIRONMENT
-              value: Development
-            - name: SQL_DBNAME
-              value: mydrivingDB
-            - name: SQL_SERVER
-              value: sqlserverzks1348.database.windows.net
+            - name: CONFIG_FILES_PATH
+              value: /secrets
             - name: SQL_USER
               value: sqladminzKs1348
             - name: SQL_PASSWORD
               value: gB2hf9Vg0
-            - name: CONFIG_FILES_PATH
-              value: /secrets
+            - name: SQL_SERVER
+              value: sqlserverzks1348.database.windows.net
+            - name: SQL_DBNAME
+              value: mydrivingDB
+            - name: OPENAPI_DOCS_URI
+              value: http://trips-service
         resources:
             requests:
               cpu: 250m
@@ -37,19 +37,16 @@ spec:
             limits:
               cpu: 500m
               memory: 500Mi
-            
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: userprofile-service
+  name: trips-service
 spec:
   type: LoadBalancer
   ports:
   - port: 80
     targetPort: 80
   selector:
-    app: userprofile-api
+    app: trips-api
 ---
-
-

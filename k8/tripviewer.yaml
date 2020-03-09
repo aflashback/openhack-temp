@@ -20,14 +20,10 @@ spec:
         env:
             - name: ASPNETCORE_ENVIRONMENT
               value: Development
-            - name: SQL_DBNAME
-              value: mydrivingDB
-            - name: SQL_SERVER
-              value: sqlserverzks1348.database.windows.net
-            - name: SQL_USER
-              value: sqladminzKs1348
-            - name: SQL_PASSWORD
-              value: gB2hf9Vg0
+            - name: TRIPS_API_ENDPOINT
+              value: http://trips-service:80
+            - name: USERPROFILE_API_ENDPOINT
+              value: http://userprofile-service:80
         resources:
             requests:
               cpu: 250m

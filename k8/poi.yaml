@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: poi-deployment
+  namespace: apispace
 spec:
   replicas: 1
   selector:
@@ -15,19 +16,21 @@ spec:
       containers:
       - name: poi
         image: registryzks1348.azurecr.io/poi:v1
+        volumeMounts:
+        - name: kvvol
+          mountPath: /kvmnt
+          readOnly: true
         ports:
         - containerPort: 80
         env:
             - name: ASPNETCORE_ENVIRONMENT
               value: Development
+            - name: CONFIG_FILES_PATH
+              value: kvmnt
             - name: SQL_DBNAME
               value: mydrivingDB
             - name: SQL_SERVER
               value: sqlserverzks1348.database.windows.net
-            - name: SQL_USER
-              value: sqladminzKs1348
-            - name: SQL_PASSWORD
-              value: gB2hf9Vg0
         resources:
             requests:
               cpu: 250m
@@ -35,11 +38,28 @@ spec:
             limits:
               cpu: 500m
               memory: 500Mi
+      volumes:
+      - name: kvvol
+        flexVolume:
+          driver: "azure/kv"
+          secretRef:
+            name: kvcreds                  # [OPTIONAL] not required if using Pod Identity
+          options:
+            usepodidentity: "false"        # [OPTIONAL] if not provided, will default to "false"
+            keyvaultname: "k8-vault"
+            keyvaultobjectaliases: SQL_PASSWORD,SQL_USER     # the name of the KeyVault
+            keyvaultobjectnames: sqlPassword;sqlUser    # list of KeyVault object names (semi-colon separated)
+            keyvaultobjecttypes: secret;secret  # list of KeyVault object types: secret, key or cert (semi-colon separated)
+            keyvaultobjectversions: ""     # [OPTIONAL] list of KeyVault object versions (semi-colon separated), will get latest if empty
+            resourcegroup: "teamResources"              # [REQUIRED FOR < v0.0.14] the resource group of the KeyVault
+            subscriptionid: "425d3ffb-5a3a-41a2-95a1-d1773b3c2c53"             # [REQUIRED FOR < v0.0.14] the subscription ID of the KeyVault
+            tenantid: "300011c5-ea20-4459-9470-162ef843232b"  
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: poi-service
+  namespace: apispace
 spec:
   type: ClusterIP
   ports:

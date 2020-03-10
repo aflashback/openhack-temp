@@ -21,9 +21,9 @@ spec:
             - name: ASPNETCORE_ENVIRONMENT
               value: Development
             - name: TRIPS_API_ENDPOINT
-              value: http://trips-service:80
+              value: http://trips-service
             - name: USERPROFILE_API_ENDPOINT
-              value: http://userprofile-service:80
+              value: http://userprofile-service
         resources:
             requests:
               cpu: 250m

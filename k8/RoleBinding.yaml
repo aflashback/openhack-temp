@@ -1,0 +1,27 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: apispace-user-access
+  namespace: apispace
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: apispace-full-access
+subjects:
+- kind: Group
+  namespace: apispace
+  name: 15d05643-180b-43c7-8637-ac08159d8b22
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: webspace-user-access
+  namespace: webspace
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: webspace-full-access
+subjects:
+- kind: Group
+  namespace: webspace
+  name: 359a64b2-d9ec-49ce-b6f7-95a58ae09efd

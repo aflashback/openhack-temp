@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  clientid: M2FiMGY5NjUtZmY5Yi00ZmE0LTliMzctNWMyZTgxZjcwNGZm
+  clientsecret: SFF2bnlSZXBUaGduVltraT9GQk5qQlAuTVllLTM3MTM=
+kind: Secret
+metadata:
+  creationTimestamp: "2020-03-10T18:42:09Z"
+  name: kvcreds
+  namespace: apispace
+  resourceVersion: "7363"
+  selfLink: /api/v1/namespaces/default/secrets/kvcreds
+  uid: d904be07-62fe-11ea-83f5-22ce0ed0c036
+type: azure/kv

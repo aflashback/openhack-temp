@@ -26,7 +26,7 @@ spec:
             - name: ASPNETCORE_ENVIRONMENT
               value: Development
             - name: CONFIG_FILES_PATH
-              value: kvmnt
+              value: /kvmnt
             - name: SQL_DBNAME
               value: mydrivingDB
             - name: SQL_SERVER
@@ -47,8 +47,8 @@ spec:
           options:
             usepodidentity: "false"        # [OPTIONAL] if not provided, will default to "false"
             keyvaultname: "k8-vault"
-            keyvaultobjectaliases: SQL_PASSWORD,SQL_USER     # the name of the KeyVault
-            keyvaultobjectnames: sqlPassword;sqlUser    # list of KeyVault object names (semi-colon separated)
+            keyvaultobjectaliases: "SQL_PASSWORD,SQL_USER"     # the name of the KeyVault
+            keyvaultobjectnames: "sqlPassword;sqlUser"    # list of KeyVault object names (semi-colon separated)
             keyvaultobjecttypes: secret;secret  # list of KeyVault object types: secret, key or cert (semi-colon separated)
             keyvaultobjectversions: ""     # [OPTIONAL] list of KeyVault object versions (semi-colon separated), will get latest if empty
             resourcegroup: "teamResources"              # [REQUIRED FOR < v0.0.14] the resource group of the KeyVault

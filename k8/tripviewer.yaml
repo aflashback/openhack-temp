@@ -25,13 +25,6 @@ spec:
               value: http://trips-service.apispace
             - name: USERPROFILE_API_ENDPOINT
               value: http://userprofile-service.apispace
-        resources:
-            requests:
-              cpu: 250m
-              memory: 256Mi
-            limits:
-              cpu: 500m
-              memory: 500Mi
             
 ---
 apiVersion: v1
